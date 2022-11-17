@@ -1,0 +1,289 @@
+#:set red (1,0,0,1)
+#:set green (0,1,0,1)
+#:set blue (0,0,1,1)
+#:set yellow (1,1,0,1)
+#:set orange (1,0.5,0,1)
+#:set purple (1,0,1,1)
+#:set white (1,1,1,1)
+#:set black (0,0,0,1)
+#:set gray (0.5,0.5,0.5,1)
+#:set light_gray (0.8,0.8,0.8,1)
+#:set dark_gray (0.2,0.2,0.2,1)
+#:set transparent (0,0,0,0)
+
+<Widget>:
+    bgg_color: (1,1,1,0)
+    canvas.before:
+        Color:
+            rgba: root.bgg_color or (1,1,1,0)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+<MainScreen>:
+    name: 'Main Screen'
+    BoxLayout:
+        padding: dp(10)
+        # Spacing:
+        Widget:
+        # RecycleView:
+        #     viewclass: "WorkerInfo"
+        #     data: root.data or [{}]*2
+        #     size_hint_x: None
+        #     width: dp(300)
+        #     RecycleBoxLayout:
+        #         default_size: dp(300), dp(260)
+        #         default_size_hint: None, None
+        #         size_hint_y: None
+        #         height: self.minimum_height
+        #         orientation: "vertical"        
+        #         spacing: dp(10)
+        #         # padding: dp(10)
+        Button:
+            text: "change screen"
+            on_release: app.change_screen("User Screen")
+        Widget:
+
+                 
+<WorkerInfo>:
+    Calendar:
+        dias_do_mes: root.dias_do_mes
+        month_name: root.month_name
+        current_month_number: root.current_month_number
+        current_year: root.current_year
+
+<Spacing@Widget>:
+    size_hint_y: None
+    size_hint_x: None
+    height: dp(10)
+    width: dp(10)
+
+<MyLabel@ButtonBehavior+Label>:
+    color: 0,0,0,1
+    markup: True
+    font_size: sp(20)
+    my_id: 35
+    my_color: (0.8,0.8,0.8,1)
+    on_release: if self.text: print('clicked', self.text)
+    canvas.before:
+        Color:
+            rgba: root.my_color
+        RoundedRectangle:
+            pos: root.pos[0] + root.width/2 - self.size[0]*0.95/2, root.pos[1] + root.height/2 - self.size[1]*0.95/2
+            size: self.size[0]*0.95, self.size[1]*0.95
+            radius: [self.height/4]
+
+<WeekLabel@Label>:
+    color: 0,0,0,1
+    markup: True
+    font_size: sp(20)
+
+
+
+<Calendar>:
+    orientation: "vertical"
+    # padding: dp(20)
+    # spacing: dp(10)
+    # month_name: 'Julho'
+    # dias_do_mes: app.screen_manager.get_screen('Main Screen').month
+    colors: root.colors or [(0.8,0.8,0.8,1)]*35
+    bgg_color: gray
+    padding: dp(10)
+    
+    BoxLayout:
+        Button:
+            text: '<'
+            on_release: root.update_to_previous_year()
+        Label:
+            color: 1,1,1,1
+            markup: True
+            text: f'[b]{root.current_year}'
+            font_size: sp(26)
+            size_hint: None, None
+            width: self.texture_size[0]
+            height: self.texture_size[1]
+            halign: 'center'
+            pos_hint: {'center_x': 0.5}
+        Button:
+            text: '>'
+            on_release: root.update_to_next_year()
+    
+    BoxLayout:
+        Button:
+            text: '<'
+            on_release: root.update_to_previous_month()
+        Label:
+            color: 1,1,1,1
+            markup: True
+            text: f'[b]{root.month_name}'
+            font_size: sp(26)
+            size_hint: None, None
+            width: self.texture_size[0]
+            height: self.texture_size[1]
+            halign: 'center'
+            pos_hint: {'center_x': 0.5}
+        Button:
+            text: '>'
+            on_release: root.update_to_next_month()
+
+    BoxLayout:
+        WeekLabel:
+            text: '[b]S'
+        WeekLabel:
+            text: '[b]T'
+        WeekLabel:
+            text: '[b]Q'
+        WeekLabel:
+            text: '[b]Q'
+        WeekLabel:
+            text: '[b]S'
+        WeekLabel:
+            text: '[b]S'
+        WeekLabel:
+            text: '[b]D'
+    BoxLayout:
+        MyLabel:
+            my_id: 0
+            text: f'{root.dias_do_mes[0][0]}' if root.dias_do_mes[0][0] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 1
+            text: str(root.dias_do_mes[0][1]) if root.dias_do_mes[0][1] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 2
+            text: str(root.dias_do_mes[0][2]) if root.dias_do_mes[0][2] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 3
+            text: str(root.dias_do_mes[0][3]) if root.dias_do_mes[0][3] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 4
+            text: str(root.dias_do_mes[0][4]) if root.dias_do_mes[0][4] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 5
+            text: str(root.dias_do_mes[0][5]) if root.dias_do_mes[0][5] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel: 
+            my_id: 6
+            text: str(root.dias_do_mes[0][6]) if root.dias_do_mes[0][6] else ''
+            my_color: root.colors[self.my_id]
+    BoxLayout:
+        MyLabel:
+            my_id: 7
+            text: str(root.dias_do_mes[1][0]) if root.dias_do_mes[1][0] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 8
+            text: str(root.dias_do_mes[1][1]) if root.dias_do_mes[1][1] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 9
+            text: str(root.dias_do_mes[1][2]) if root.dias_do_mes[1][2] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 10
+            text: str(root.dias_do_mes[1][3]) if root.dias_do_mes[1][3] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 11
+            text: str(root.dias_do_mes[1][4]) if root.dias_do_mes[1][4] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 12
+            text: str(root.dias_do_mes[1][5]) if root.dias_do_mes[1][5] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel: 
+            my_id: 13
+            text: str(root.dias_do_mes[1][6]) if root.dias_do_mes[1][6] else ''
+            my_color: root.colors[self.my_id]
+    BoxLayout:
+        MyLabel:
+            my_id: 14
+            text: str(root.dias_do_mes[2][0]) if root.dias_do_mes[2][0] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 15
+            text: str(root.dias_do_mes[2][1]) if root.dias_do_mes[2][1] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 16
+            text: str(root.dias_do_mes[2][2]) if root.dias_do_mes[2][2] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 17
+            text: str(root.dias_do_mes[2][3]) if root.dias_do_mes[2][3] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 18
+            text: str(root.dias_do_mes[2][4]) if root.dias_do_mes[2][4] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 19
+            text: str(root.dias_do_mes[2][5]) if root.dias_do_mes[2][5] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel: 
+            my_id: 20
+            text: str(root.dias_do_mes[2][6]) if root.dias_do_mes[2][6] else ''
+            my_color: root.colors[self.my_id]
+    BoxLayout:
+        MyLabel:
+            my_id: 21
+            text: str(root.dias_do_mes[3][0]) if root.dias_do_mes[3][0] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 22
+            text: str(root.dias_do_mes[3][1]) if root.dias_do_mes[3][1] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 23
+            text: str(root.dias_do_mes[3][2]) if root.dias_do_mes[3][2] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 24
+            text: str(root.dias_do_mes[3][3]) if root.dias_do_mes[3][3] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 25
+            text: str(root.dias_do_mes[3][4]) if root.dias_do_mes[3][4] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 26
+            text: str(root.dias_do_mes[3][5]) if root.dias_do_mes[3][5] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel: 
+            my_id: 27
+            text: str(root.dias_do_mes[3][6]) if root.dias_do_mes[3][6] else ''
+            my_color: root.colors[self.my_id]
+    BoxLayout:
+        MyLabel:
+            my_id: 28
+            text: str(root.dias_do_mes[4][0]) if len(root.dias_do_mes) > 4 and root.dias_do_mes[4][0] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 29
+            text: str(root.dias_do_mes[4][1]) if len(root.dias_do_mes) > 4 and root.dias_do_mes[4][1] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 30
+            text: str(root.dias_do_mes[4][2]) if len(root.dias_do_mes) > 4 and root.dias_do_mes[4][2] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 31
+            text: str(root.dias_do_mes[4][3]) if len(root.dias_do_mes) > 4 and root.dias_do_mes[4][3] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 32
+            text: str(root.dias_do_mes[4][4]) if len(root.dias_do_mes) > 4 and root.dias_do_mes[4][4] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel:
+            my_id: 33
+            text: str(root.dias_do_mes[4][5]) if len(root.dias_do_mes) > 4 and root.dias_do_mes[4][5] else ''
+            my_color: root.colors[self.my_id]
+        MyLabel: 
+            my_id: 34
+            text: str(root.dias_do_mes[4][6]) if len(root.dias_do_mes) > 4 and root.dias_do_mes[4][6] else ''
+            my_color: root.colors[self.my_id]
