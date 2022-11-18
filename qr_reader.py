@@ -63,6 +63,7 @@ class QRReader(Preview, CommonGestures, F.Screen):
         # image_pos    : location of Texture in Preview Widget (letterbox)
         # scale  : scale from Analysis resolution to Preview resolution
         # mirror : true if Preview is mirrored
+        return
 
         self.numero_da_imagem_analisada += 1
         print('Número da imagem analisada: ', self.numero_da_imagem_analisada)

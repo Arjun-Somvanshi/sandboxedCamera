@@ -14,6 +14,7 @@ if kv_path not in Builder.files:
 class CameraScreen(F.Screen):
     def on_enter(self):
         print("Entered camera screen")
+        self.app = App.get_running_app()
 
     def initialize_camera(self):
         print("Initializing camera")
@@ -43,9 +44,17 @@ class CameraScreen(F.Screen):
                 self.connect_camera()
             else:
                 print("permissão não concedida")
-                self.app.create_quick_message(
-                    "Falha na Permissão",
-                    "Por favor, conceda acesso para utilização da câmera para poder ler o QR code",
-                    request_permissions,
-                    ([Permission.CAMERA], self.connect_camera),
-                )
+                request_permissions([Permission.CAMERA], self.connect_camera)
+    def connect_camera(self, *args):
+        if platform == "android":
+            from android.permissions import check_permission, Permission
+
+            permission = check_permission(Permission.CAMERA)
+            if permission:
+                print("permissions are ok")
+                Clock.schedule_once(self.change_to_qr_screen, 0.5)
+
+    def change_to_qr_screen(self, *args):
+        print("conectando câmera finalmente")
+        print("mudando de screen para qr screen")
+        self.app.screen_manager.current = "QR Screen"

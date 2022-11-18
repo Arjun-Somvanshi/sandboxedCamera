@@ -16,6 +16,7 @@ if platform != "android":
         AUTORELOADER_PATHS = [
             (os.path.join(os.getcwd(), "main.py"), {"recursive": True}),
             (os.path.join(os.getcwd(), "screens"), {"recursive": True}),
+            (os.path.join(os.getcwd(), "qr_reader.py"), {"recursive": True}),
         ]
 
         KV_FILES = {
@@ -67,6 +68,8 @@ if platform != "android":
                     "poetry.lock",
                     "pyproject.toml",
                     "app_copy.zip",
+                    "camera4kivy",
+                    "camerax_provider",
                     ".DS_Store",
                 ),
             )
