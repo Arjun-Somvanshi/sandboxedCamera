@@ -14,6 +14,9 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.utils import platform
 
+from security import AES_Encrypt, AES_Decrypt
+from screens.main_screen import writeJsonFile, readJsonFile
+
 # kivy is already loaded as per: https://stackoverflow.com/a/59011183/16355112
 # print("Cgit
 
@@ -21,8 +24,29 @@ kv_path = os.getcwd() + "/screens/gallery_screen.kv"
 if kv_path not in Builder.files:
     Builder.load_file("screens/gallery_screen.kv")
 
+
 class GalleryScreen(F.Screen):
     app = App.get_running_app()
+    data = F.ListProperty()
+
+    def on_enter(self):
+        print("Entered gallery screen")
+        # load image names on self.data
+        Clock.schedule_interval(self.load_images, 1)
+        # self.load_images()
+
+    def load_images(self, *args):
+        print("Loading images")
+        if os.path.exists("images"):
+            print("images folder exists")
+            image_names = os.listdir("images")
+            self.data = [{"text": image_name} for image_name in image_names]
+        else:
+            print("images folder does not exist")
+            # create images folder
+            os.mkdir("images")
+            self.data = []
+
     def initialize_camera(self):
         print("Initializing camera")
         if platform == "android":
@@ -52,6 +76,36 @@ class GalleryScreen(F.Screen):
             else:
                 print("permissão não concedida")
                 request_permissions([Permission.CAMERA], self.connect_camera)
+        else:
+            print("Encrypting image")
+            self.app.change_screen("QRReaderHelper Screen")
+            # image_name = "bleach villain introduction.png"
+            # self.encrypt_image(image_name)
+
+    def encrypt_image(self, image_path):
+        # image_path = os.path.join(os.getcwd(), "images", image_name)
+        # encrypted_image_name = f'{image_name.split(".")[0]}.json'
+        encrypted_image_name = f"{image_path.split('/')[-1].split('.')[0]}.json"
+
+        # open the image
+        with open(image_path, "rb") as f:
+            image_data = f.read()
+
+        # encrypt the image
+        encrypted_image = AES_Encrypt(self.app.key, image_data)
+
+        from icecream import ic
+
+        ic(encrypted_image)
+
+        if os.path.exists("images"):
+            print("images folder exists")
+            writeJsonFile("images", encrypted_image_name, encrypted_image)
+
+        else:
+            print("images folder does not exist")
+            os.mkdir("images")
+            writeJsonFile("images", encrypted_image_name, encrypted_image)
 
     def connect_camera(self, *args):
         if platform == "android":
@@ -66,7 +120,6 @@ class GalleryScreen(F.Screen):
         print("conectando câmera finalmente")
         print("mudando de screen para qr screen")
         self.app.screen_manager.current = "QR Screen"
-
 
 
 class SelectableRecycleBoxLayout(
@@ -114,23 +167,23 @@ class SelectableLabel(RecycleDataViewBehavior, Button):
         image_screen.file_name = self.text
 
 
-class RV(RecycleView):
-    def __init__(self, **kwargs):
-        super(RV, self).__init__(**kwargs)
+# class RV(RecycleView):
+#     def __init__(self, **kwargs):
+#         super(RV, self).__init__(**kwargs)
 
-        # self.data = []
-        if os.path.isfile("index.json"):
-            read_data = readJsonFile(".", "index.json")
-            print("wtf is read_data", read_data)
-            # self.data = [{"text": read_data[x]} for x in read_data.keys()]
-            self.data = [read_data[x] for x in read_data.keys()]
-            print("datata", self.data)
+#         # self.data = []
+#         if os.path.isfile("index.json"):
+#             read_data = readJsonFile(".", "index.json")
+#             print("wtf is read_data", read_data)
+#             # self.data = [{"text": read_data[x]} for x in read_data.keys()]
+#             self.data = [read_data[x] for x in read_data.keys()]
+#             print("datata", self.data)
 
-            # self.data = []  # WORKS
-            # self.data = [{"1"}]
-            # print("self.data??", self.data)
-            # print("what is self.data?", type(self.data), list(self.data))
-            # self.data = F.ListProperty(readJsonFile(".", "index.json"))
-        else:
-            self.data = []
-        # self.data = F.ListProperty([])
+#             # self.data = []  # WORKS
+#             # self.data = [{"1"}]
+#             # print("self.data??", self.data)
+#             # print("what is self.data?", type(self.data), list(self.data))
+#             # self.data = F.ListProperty(readJsonFile(".", "index.json"))
+#         else:
+#             self.data = []
+#         # self.data = F.ListProperty([])

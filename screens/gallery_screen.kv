@@ -2,8 +2,17 @@
     name: "Gallery Screen"
     BoxLayout:
         orientation: 'vertical'
-        RV:
+        RecycleView:
+            data: root.data
             id: RV_ID
+            viewclass: 'SelectableLabel'
+            SelectableRecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                touch_multiselect: True
         Button:
             id: photo_button_id
             text: "Take Photo"
@@ -19,16 +28,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-    #on_release: print(self.text)
+    # on_release: print(self.text)
         
-<RV>:
-    viewclass: 'SelectableLabel'
-    SelectableRecycleBoxLayout:
-        default_size: None, dp(56)
-        default_size_hint: 1, None
-        size_hint_y: None
-        height: self.minimum_height
-        orientation: 'vertical'
-        # multiselect: True
-        touch_multiselect: True
+    
     

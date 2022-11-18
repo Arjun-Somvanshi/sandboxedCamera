@@ -50,6 +50,16 @@ def hashit(passw):
 
 class MainScreen(F.Screen):
     app = App.get_running_app()
+
+    def on_enter(self):
+        print("Entered main screen")
+        if platform == "android":
+            from android.permissions import request_permissions, Permission
+
+            request_permissions(
+                [Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE]
+            )
+
     def set_entrypoint(self):
         if os.path.isfile("creds"):
             self.ids.sm.current = "Login Screen"

@@ -1,0 +1,27 @@
+<QRReaderHelperScreen>:
+    name: 'QRReaderHelper Screen'
+
+    FloatLayout:
+        Button:
+            text: 'Photo!'
+            size_hint: None, None
+            size: dp(75), dp(75)
+            pos_hint: {'center_x': .5, 'center_y': .025}
+            on_press: app.root.current = 'QRReader Screen'
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            color: 0,0,0,1
+            on_release: root.take_photo()
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Ellipse:
+                    pos: self.pos
+                    size: self.size
+                    # set the angle to 0 to start at the top
+                    angle_start: 0
+                    # set the angle to 360 to complete the circle
+                    angle_end: 360
+                    # set the segments to 100 to make a smooth circle
+                    segments: 100
+

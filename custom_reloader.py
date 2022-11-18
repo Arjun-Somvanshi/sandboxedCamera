@@ -17,6 +17,7 @@ if platform != "android":
             (os.path.join(os.getcwd(), "main.py"), {"recursive": True}),
             (os.path.join(os.getcwd(), "screens"), {"recursive": True}),
             (os.path.join(os.getcwd(), "qr_reader.py"), {"recursive": True}),
+            (os.path.join(os.getcwd(), "security.py"), {"recursive": True}),
         ]
 
         KV_FILES = {

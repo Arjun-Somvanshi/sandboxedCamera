@@ -7,7 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-
 cython = "^0.29.32"
 kaki = "^0.1.5"
 trio = "^0.22.0"
