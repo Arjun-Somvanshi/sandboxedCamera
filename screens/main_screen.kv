@@ -10,7 +10,8 @@
 #:set light_gray (0.8,0.8,0.8,1)
 #:set dark_gray (0.2,0.2,0.2,1)
 #:set transparent (0,0,0,0)
-
+<TextInput>:
+    multiline: False
 <Widget>:
     bgg_color: (1,1,1,0)
     # canvas.before:
@@ -58,6 +59,9 @@
                     size_hint_y: None
                     height: dp(50)
                     halign: "center"
+                    password: True
+                    text: "helloworld"
+                    on_text_validate: root.auth()
                 Button:
                     text: "Login"
                     size_hint_y: None

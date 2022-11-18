@@ -9,6 +9,7 @@ from pprint import pprint
 from kivy.app import App
 import json
 from Crypto.Hash import SHA256
+from security import kdf, make_salt
 
 # from icecream import ic
 
@@ -48,6 +49,7 @@ def hashit(passw):
 
 
 class MainScreen(F.Screen):
+    app = App.get_running_app()
     def set_entrypoint(self):
         if os.path.isfile("creds"):
             self.ids.sm.current = "Login Screen"
@@ -62,6 +64,10 @@ class MainScreen(F.Screen):
             # save credentials
             passw = self.ids.passw.text
             hex = hashit(passw)
+            # make salt
+            salt = make_salt()
+            print(salt)
+            writeJsonFile(".", "salt", {"salt": salt.decode("utf-16")})
             # generate key
             writeJsonFile(".", "creds", {"hash": hex})
             # change screen
@@ -70,9 +76,15 @@ class MainScreen(F.Screen):
             print("You are not allowed")
 
     def auth(self):
+        # get salt
+        salt = readJsonFile(".", "salt")["salt"].encode("utf-16")[2:]
+        print(salt)
+        # set master key
+        self.app.key = kdf(self.ids.passw.text, salt)
+        print(self.app.key)
         hex1 = hashit(self.ids.password.text)
         hex2 = readJsonFile(".", "creds")["hash"]
         if hex1 == hex2:
-            print("Gallery Opened")
+            self.app.change_screen("Gallery Screen")
         else:
             print("Wrong Password")

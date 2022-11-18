@@ -7,3 +7,5 @@ __pycache__
 temp
 .DS_Store
 configs
+salt
+creds

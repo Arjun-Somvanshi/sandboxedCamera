@@ -6,7 +6,10 @@
             id: RV_ID
         Button:
             id: photo_button_id
-            text: "Take Photo"  
+            text: "Take Photo"
+            size_hint_y: None
+            height: dp(50)  
+            on_release: root.initialize_camera()
 
 <SelectableLabel>:
     # Draw a background to indicate selection
