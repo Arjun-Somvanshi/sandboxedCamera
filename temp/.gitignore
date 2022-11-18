@@ -1,6 +1,0 @@
-bin
-buildozer.spec
-.buildozer
-app_copy.zip
-screens/__pycache__
-__pycache__
