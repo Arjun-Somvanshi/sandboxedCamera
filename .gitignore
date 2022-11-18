@@ -4,3 +4,6 @@ buildozer.spec
 app_copy.zip
 screens/__pycache__
 __pycache__
+temp
+.DS_Store
+configs
