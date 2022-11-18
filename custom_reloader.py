@@ -33,6 +33,7 @@ if platform != "android":
 
         def build_app(self):
             from icecream import ic
+
             # ic(self.CLASSES)
             return self.build_and_reload()
 
@@ -51,7 +52,7 @@ if platform != "android":
             destination = os.path.join(os.getcwd(), "temp")
             if os.path.exists(destination):
                 rmtree(destination)
-                
+
             copytree(
                 source,
                 destination,
@@ -81,10 +82,8 @@ if platform != "android":
             subprocess.run(
                 f"cd {destination} && zip -r ../app_copy.zip ./* -x ./temp",
                 shell=True,
-                stdout=subprocess.DEVNULL
+                stdout=subprocess.DEVNULL,
             )
-
-            
 
             # Sending the zip file to the phone
             os.system("python send_app_to_phone.py")
@@ -92,9 +91,9 @@ if platform != "android":
         def _filename_to_module(self, filename):
             rootpath = self.get_root_path()
             if filename.startswith(rootpath):
-                filename = filename[len(rootpath):]
+                filename = filename[len(rootpath) :]
 
-            if platform == 'macosx':
+            if platform == "macosx":
                 prefix = os.sep
             else:
                 prefix = os.path.sep

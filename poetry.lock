@@ -13,7 +13,7 @@ six = "*"
 test = ["astroid (<=2.5.3)", "pytest"]
 
 [[package]]
-name = "async-generator"
+name = "async_generator"
 version = "1.10"
 description = "Async generators and context managers for Python 3.5+"
 category = "main"
@@ -32,7 +32,7 @@ python-versions = ">=3.5"
 dev = ["cloudpickle", "coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy (>=0.900,!=0.940)", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "sphinx", "sphinx-notfound-page", "zope.interface"]
 docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
 tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "zope.interface"]
-tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
+tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
 name = "black"
@@ -54,23 +54,6 @@ colorama = ["colorama (>=0.4.3)"]
 d = ["aiohttp (>=3.7.4)"]
 jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
 uvloop = ["uvloop (>=0.15.2)"]
-
-[[package]]
-name = "buildozer"
-version = "1.4.1.dev0"
-description = "Generic Python packager for Android / iOS and Desktop"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-pexpect = "*"
-sh = "*"
-virtualenv = "*"
-
-[package.source]
-type = "url"
-url = "https://github.com/kivy/buildozer/archive/master.zip"
 
 [[package]]
 name = "certifi"
@@ -100,7 +83,7 @@ optional = false
 python-versions = ">=3.6.0"
 
 [package.extras]
-unicode-backport = ["unicodedata2"]
+unicode_backport = ["unicodedata2"]
 
 [[package]]
 name = "click"
@@ -122,20 +105,12 @@ optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 
 [[package]]
-name = "cython"
+name = "Cython"
 version = "0.29.32"
 description = "The Cython compiler for writing C extensions for the Python language."
 category = "main"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
-
-[[package]]
-name = "distlib"
-version = "0.3.6"
-description = "Distribution utilities"
-category = "main"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "docutils"
@@ -176,18 +151,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "filelock"
-version = "3.8.0"
-description = "A platform independent file lock."
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.extras]
-docs = ["furo (>=2022.6.21)", "sphinx (>=5.1.1)", "sphinx-autodoc-typehints (>=1.19.1)"]
-testing = ["covdefaults (>=2.2)", "coverage (>=6.4.2)", "pytest (>=7.1.2)", "pytest-cov (>=3)", "pytest-timeout (>=2.1)"]
-
-[[package]]
 name = "icecream"
 version = "2.1.3"
 description = "Never use print() to debug again; inspect variables, expressions, and program execution with a single, simple function call."
@@ -223,7 +186,7 @@ monotonic = "*"
 watchdog = "*"
 
 [[package]]
-name = "kivy"
+name = "Kivy"
 version = "2.1.0"
 description = "A software library for rapid development of hardware-accelerated multitouch applications."
 category = "main"
@@ -251,7 +214,7 @@ sdl2 = ["kivy-deps.sdl2 (>=0.4.5,<0.5.0)"]
 tuio = ["oscpy"]
 
 [[package]]
-name = "kivy-deps-angle"
+name = "kivy-deps.angle"
 version = "0.3.3"
 description = "Repackaged binary dependency of Kivy."
 category = "main"
@@ -259,7 +222,7 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "kivy-deps-glew"
+name = "kivy-deps.glew"
 version = "0.3.1"
 description = "Repackaged binary dependency of Kivy."
 category = "main"
@@ -267,7 +230,7 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "kivy-deps-sdl2"
+name = "kivy-deps.sdl2"
 version = "0.4.5"
 description = "Repackaged binary dependency of Kivy."
 category = "main"
@@ -275,7 +238,7 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "kivy-garden"
+name = "Kivy-Garden"
 version = "0.1.5"
 description = ""
 category = "main"
@@ -284,29 +247,6 @@ python-versions = "*"
 
 [package.dependencies]
 requests = "*"
-
-[[package]]
-name = "kivymd"
-version = "1.2.0.dev0"
-description = "Set of widgets for Kivy inspired by Google's Material Design"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-develop = false
-
-[package.dependencies]
-kivy = ">=2.0.0"
-pillow = "*"
-
-[package.extras]
-dev = ["black", "coveralls", "flake8", "isort[pyproject]", "pre-commit", "pyinstaller[hook-testing]", "pytest", "pytest-cov", "pytest-timeout", "pytest_asyncio"]
-docs = ["furo", "sphinx", "sphinx-autoapi (==1.4.0)", "sphinx-copybutton", "sphinx-notfound-page", "sphinx-tabs"]
-
-[package.source]
-type = "git"
-url = "https://github.com/kivymd/KivyMD.git"
-reference = "master"
-resolved_reference = "af4a49de73369d43705ff674eb11c6e66bbe2016"
 
 [[package]]
 name = "monotonic"
@@ -344,33 +284,10 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
-name = "pexpect"
-version = "4.8.0"
-description = "Pexpect allows easy control of interactive console applications."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-ptyprocess = ">=0.5"
-
-[[package]]
-name = "pillow"
-version = "9.3.0"
-description = "Python Imaging Library (Fork)"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.extras]
-docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-issues (>=3.0.1)", "sphinx-removed-in", "sphinxext-opengraph"]
-tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
-
-[[package]]
 name = "platformdirs"
 version = "2.5.4"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -404,14 +321,6 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 test = ["enum34", "ipaddress", "mock", "pywin32", "wmi"]
 
 [[package]]
-name = "ptyprocess"
-version = "0.7.0"
-description = "Run a subprocess in a pseudo terminal"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "pycparser"
 version = "2.21"
 description = "C parser in Python"
@@ -428,7 +337,7 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
-name = "pygments"
+name = "Pygments"
 version = "2.13.0"
 description = "Pygments is a syntax highlighting package written in Python."
 category = "main"
@@ -473,15 +382,7 @@ urllib3 = ">=1.21.1,<1.27"
 
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
-use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
-
-[[package]]
-name = "sh"
-version = "1.14.3"
-description = "Python subprocess replacement"
-category = "main"
-optional = false
-python-versions = "*"
+use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "six"
@@ -547,23 +448,6 @@ secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "ipaddress", "p
 socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
 [[package]]
-name = "virtualenv"
-version = "20.16.7"
-description = "Virtual Python Environment builder"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-distlib = ">=0.3.6,<1"
-filelock = ">=3.4.1,<4"
-platformdirs = ">=2.4,<3"
-
-[package.extras]
-docs = ["proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-argparse (>=0.3.2)", "sphinx-rtd-theme (>=1)", "towncrier (>=22.8)"]
-testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=21.3)", "pytest (>=7.0.1)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.2)", "pytest-mock (>=3.6.1)", "pytest-randomly (>=3.10.3)", "pytest-timeout (>=2.1)"]
-
-[[package]]
 name = "watchdog"
 version = "2.1.9"
 description = "Filesystem events monitoring"
@@ -577,14 +461,14 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "a08f89b3d10d5dcbb7fd0670d1f2faa4ef1c54d167e201d26aea0392ab9970ec"
+content-hash = "0a7cb547ed850fe912bb971586a74ed6fe56168306a85755d9fb62d20dff61d7"
 
 [metadata.files]
 asttokens = [
     {file = "asttokens-2.1.0-py2.py3-none-any.whl", hash = "sha256:1b28ed85e254b724439afc783d4bee767f780b936c3fe8b3275332f42cf5f561"},
     {file = "asttokens-2.1.0.tar.gz", hash = "sha256:4aa76401a151c8cc572d906aad7aea2a841780834a19d780f4321c0fe1b54635"},
 ]
-async-generator = [
+async_generator = [
     {file = "async_generator-1.10-py3-none-any.whl", hash = "sha256:01c7bf666359b4967d2cda0000cc2e4af16a0ae098cbffcb8472fb9e8ad6585b"},
     {file = "async_generator-1.10.tar.gz", hash = "sha256:6ebb3d106c12920aaae42ccb6f787ef5eefdcdd166ea3d628fa8476abe712144"},
 ]
@@ -615,7 +499,6 @@ black = [
     {file = "black-22.10.0-py3-none-any.whl", hash = "sha256:c957b2b4ea88587b46cf49d1dc17681c1e672864fd7af32fc1e9664d572b3458"},
     {file = "black-22.10.0.tar.gz", hash = "sha256:f513588da599943e0cde4e32cc9879e825d58720d6557062d1098c5ad80080e1"},
 ]
-buildozer = []
 certifi = [
     {file = "certifi-2022.9.24-py3-none-any.whl", hash = "sha256:90c1a32f1d68f940488354e36370f6cca89f0f106db09518524c88d6ed83f382"},
     {file = "certifi-2022.9.24.tar.gz", hash = "sha256:0d9c601124e5a6ba9712dbc60d9c53c21e34f5f641fe83002317394311bdce14"},
@@ -698,7 +581,7 @@ colorama = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
-cython = [
+Cython = [
     {file = "Cython-0.29.32-cp27-cp27m-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:39afb4679b8c6bf7ccb15b24025568f4f9b4d7f9bf3cbd981021f542acecd75b"},
     {file = "Cython-0.29.32-cp27-cp27m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:dbee03b8d42dca924e6aa057b836a064c769ddfd2a4c2919e65da2c8a362d528"},
     {file = "Cython-0.29.32-cp27-cp27mu-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:5ba622326f2862f9c1f99ca8d47ade49871241920a352c917e16861e25b0e5c3"},
@@ -740,10 +623,6 @@ cython = [
     {file = "Cython-0.29.32-py2.py3-none-any.whl", hash = "sha256:eeb475eb6f0ccf6c039035eb4f0f928eb53ead88777e0a760eccb140ad90930b"},
     {file = "Cython-0.29.32.tar.gz", hash = "sha256:8733cf4758b79304f2a4e39ebfac5e92341bce47bcceb26c1254398b2f8c1af7"},
 ]
-distlib = [
-    {file = "distlib-0.3.6-py2.py3-none-any.whl", hash = "sha256:f35c4b692542ca110de7ef0bea44d73981caeb34ca0b9b6b2e6d7790dda8f80e"},
-    {file = "distlib-0.3.6.tar.gz", hash = "sha256:14bad2d9b04d3a36127ac97f30b12a19268f211063d8f8ee4f47108896e11b46"},
-]
 docutils = [
     {file = "docutils-0.19-py3-none-any.whl", hash = "sha256:5e1de4d849fee02c63b040a4a3fd567f4ab104defd8a5511fbbc24a8a017efbc"},
     {file = "docutils-0.19.tar.gz", hash = "sha256:33995a6753c30b7f577febfc2c50411fec6aac7f7ffeb7c4cfe5991072dcf9e6"},
@@ -777,10 +656,6 @@ ffpyplayer = [
     {file = "ffpyplayer-4.3.5-cp39-cp39-win_amd64.whl", hash = "sha256:f6e51bdc63ec251cd46d57282f77d8c5599f5359165b6e8d68d06237a7d1e806"},
     {file = "ffpyplayer-4.3.5.tar.gz", hash = "sha256:be6b092e31446830fb1073955d0420a6510952d068da70e6163ad74420f0e434"},
 ]
-filelock = [
-    {file = "filelock-3.8.0-py3-none-any.whl", hash = "sha256:617eb4e5eedc82fc5f47b6d61e4d11cb837c56cb4544e39081099fa17ad109d4"},
-    {file = "filelock-3.8.0.tar.gz", hash = "sha256:55447caa666f2198c5b6b13a26d2084d26fa5b115c00d065664b2124680c4edc"},
-]
 icecream = [
     {file = "icecream-2.1.3-py2.py3-none-any.whl", hash = "sha256:757aec31ad4488b949bc4f499d18e6e5973c40cc4d4fc607229e78cfaec94c34"},
     {file = "icecream-2.1.3.tar.gz", hash = "sha256:0aa4a7c3374ec36153a1d08f81e3080e83d8ac1eefd97d2f4fe9544e8f9b49de"},
@@ -793,7 +668,7 @@ kaki = [
     {file = "kaki-0.1.5-py2.py3-none-any.whl", hash = "sha256:26205363dd178bc679bef9448ce1b9c5091bb4c41b7fd02dfa749a0952eed74b"},
     {file = "kaki-0.1.5.tar.gz", hash = "sha256:4fcab3fdd1564f54fec8b3016a6585f7f2ad960f16ee074c94482e06f0fb113e"},
 ]
-kivy = [
+Kivy = [
     {file = "Kivy-2.1.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:5936bec77659b7774100094462ee124684235572ddc5177e47f99ec9a9ecba84"},
     {file = "Kivy-2.1.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:222c1cae30a5f85b1ccf6bdab391a2a255a2acb3b891ce04037156109c7856f2"},
     {file = "Kivy-2.1.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:eec5c58b82a23c15b70f687f161450a310b0c99075e1e425a00b2e096cec5261"},
@@ -816,7 +691,7 @@ kivy = [
     {file = "Kivy-2.1.0-cp39-cp39-win_amd64.whl", hash = "sha256:260f88aff72ba2269e6733598e9081533072769ed0bec2d020a8bd010d1b6751"},
     {file = "Kivy-2.1.0.tar.gz", hash = "sha256:3a16f3ba3b70d5e7943d7ee5c4cbbd52bc4675f38da4bf2b3005c1639d6c04b3"},
 ]
-kivy-deps-angle = [
+"kivy-deps.angle" = [
     {file = "kivy_deps.angle-0.3.3-cp310-cp310-win32.whl", hash = "sha256:8e571b2c662480a265420d6ded386df208d83272896daf616256672c5648e538"},
     {file = "kivy_deps.angle-0.3.3-cp310-cp310-win_amd64.whl", hash = "sha256:e48457f6830fb53aaaa6bf3bd63d50120c1bc1c94f207d988cc8071c122456e9"},
     {file = "kivy_deps.angle-0.3.3-cp311-cp311-win32.whl", hash = "sha256:fdc3de5ead670a8ee0bb411b603cabeaecf7fe277cf99cd70c9585cd964f19a2"},
@@ -828,11 +703,9 @@ kivy-deps-angle = [
     {file = "kivy_deps.angle-0.3.3-cp39-cp39-win32.whl", hash = "sha256:00a4922a50a55f532722a4419eb394a7a8837d0f78620e2b47f33c6db45a4dc0"},
     {file = "kivy_deps.angle-0.3.3-cp39-cp39-win_amd64.whl", hash = "sha256:de6dbe3273e95a85f6f96c9f52cc0d29a1f92aa05fd10de886ba8c483021b532"},
 ]
-kivy-deps-glew = [
+"kivy-deps.glew" = [
     {file = "kivy_deps.glew-0.3.1-cp310-cp310-win32.whl", hash = "sha256:8f4b3ed15acb62474909b6d41661ffb4da9eb502bb5684301fb2da668f288a58"},
     {file = "kivy_deps.glew-0.3.1-cp310-cp310-win_amd64.whl", hash = "sha256:aef2d2a93f129d8425c75234e7f6cc0a34b59a4aee67f6d2cd7a5fdfa9915b53"},
-    {file = "kivy_deps.glew-0.3.1-cp311-cp311-win32.whl", hash = "sha256:ee2f80ef7ac70f4b61c50da8101b024308a8c59a57f7f25a6e09762b6c48f942"},
-    {file = "kivy_deps.glew-0.3.1-cp311-cp311-win_amd64.whl", hash = "sha256:22e155ec59ce717387f5d8804811206d200a023ba3d0bc9bbf1393ee28d0053e"},
     {file = "kivy_deps.glew-0.3.1-cp37-cp37m-win32.whl", hash = "sha256:5bf6a63fe9cc4fe7bbf280ec267ec8c47914020a1175fb22152525ff1837b436"},
     {file = "kivy_deps.glew-0.3.1-cp37-cp37m-win_amd64.whl", hash = "sha256:d64a8625799fab7a7efeb3661ef8779a7f9c6d80da53eed87a956320f55530fa"},
     {file = "kivy_deps.glew-0.3.1-cp38-cp38-win32.whl", hash = "sha256:00f4ae0a4682d951266458ddb639451edb24baa54a35215dce889209daf19a06"},
@@ -840,7 +713,7 @@ kivy-deps-glew = [
     {file = "kivy_deps.glew-0.3.1-cp39-cp39-win32.whl", hash = "sha256:4e377ed97670dfda619a1b63a82345a8589be90e7c616a458fba2810708810b1"},
     {file = "kivy_deps.glew-0.3.1-cp39-cp39-win_amd64.whl", hash = "sha256:081a09b92f7e7817f489f8b6b31c9c9623661378de1dce1d6b097af5e7d42b45"},
 ]
-kivy-deps-sdl2 = [
+"kivy-deps.sdl2" = [
     {file = "kivy_deps.sdl2-0.4.5-cp310-cp310-win32.whl", hash = "sha256:1884e0ce5d1f47ccf63b55021e2b2c04eae433111f2c246a82f4c06697624def"},
     {file = "kivy_deps.sdl2-0.4.5-cp310-cp310-win_amd64.whl", hash = "sha256:97be14de619deb853867b66355a1eea9f26d572c94888e934ca9fd8fcf3593b2"},
     {file = "kivy_deps.sdl2-0.4.5-cp37-cp37m-win32.whl", hash = "sha256:660c23993aa0df2de18dcc4e0fce2e1344e800469a702f49459f18762ebe5aa0"},
@@ -850,11 +723,10 @@ kivy-deps-sdl2 = [
     {file = "kivy_deps.sdl2-0.4.5-cp39-cp39-win32.whl", hash = "sha256:0126c141dad69147315c43144c1e5356982860bed49ced1ad186616ae33b761a"},
     {file = "kivy_deps.sdl2-0.4.5-cp39-cp39-win_amd64.whl", hash = "sha256:8a54e000813471ae141ed4304eb34ee90b27c06f95565507e11e138f693c3885"},
 ]
-kivy-garden = [
+Kivy-Garden = [
     {file = "Kivy Garden-0.1.5.tar.gz", hash = "sha256:2b8377378e87501d5d271f33d94f0e44c089884572c64f89c9d609b1f86a2748"},
     {file = "Kivy_Garden-0.1.5-py3-none-any.whl", hash = "sha256:ef50f44b96358cf10ac5665f27a4751bb34ef54051c54b93af891f80afe42929"},
 ]
-kivymd = []
 monotonic = [
     {file = "monotonic-1.6-py2.py3-none-any.whl", hash = "sha256:68687e19a14f11f26d140dd5c86f3dba4bf5df58003000ed467e0e2a69bca96c"},
     {file = "monotonic-1.6.tar.gz", hash = "sha256:3a55207bcfed53ddd5c5bae174524062935efed17792e9de2ad0205ce9ad63f7"},
@@ -870,73 +742,6 @@ outcome = [
 pathspec = [
     {file = "pathspec-0.10.2-py3-none-any.whl", hash = "sha256:88c2606f2c1e818b978540f73ecc908e13999c6c3a383daf3705652ae79807a5"},
     {file = "pathspec-0.10.2.tar.gz", hash = "sha256:8f6bf73e5758fd365ef5d58ce09ac7c27d2833a8d7da51712eac6e27e35141b0"},
-]
-pexpect = [
-    {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
-    {file = "pexpect-4.8.0.tar.gz", hash = "sha256:fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"},
-]
-pillow = [
-    {file = "Pillow-9.3.0-1-cp37-cp37m-win32.whl", hash = "sha256:e6ea6b856a74d560d9326c0f5895ef8050126acfdc7ca08ad703eb0081e82b74"},
-    {file = "Pillow-9.3.0-1-cp37-cp37m-win_amd64.whl", hash = "sha256:32a44128c4bdca7f31de5be641187367fe2a450ad83b833ef78910397db491aa"},
-    {file = "Pillow-9.3.0-cp310-cp310-macosx_10_10_x86_64.whl", hash = "sha256:0b7257127d646ff8676ec8a15520013a698d1fdc48bc2a79ba4e53df792526f2"},
-    {file = "Pillow-9.3.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:b90f7616ea170e92820775ed47e136208e04c967271c9ef615b6fbd08d9af0e3"},
-    {file = "Pillow-9.3.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:68943d632f1f9e3dce98908e873b3a090f6cba1cbb1b892a9e8d97c938871fbe"},
-    {file = "Pillow-9.3.0-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:be55f8457cd1eac957af0c3f5ece7bc3f033f89b114ef30f710882717670b2a8"},
-    {file = "Pillow-9.3.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5d77adcd56a42d00cc1be30843d3426aa4e660cab4a61021dc84467123f7a00c"},
-    {file = "Pillow-9.3.0-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:829f97c8e258593b9daa80638aee3789b7df9da5cf1336035016d76f03b8860c"},
-    {file = "Pillow-9.3.0-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:801ec82e4188e935c7f5e22e006d01611d6b41661bba9fe45b60e7ac1a8f84de"},
-    {file = "Pillow-9.3.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:871b72c3643e516db4ecf20efe735deb27fe30ca17800e661d769faab45a18d7"},
-    {file = "Pillow-9.3.0-cp310-cp310-win32.whl", hash = "sha256:655a83b0058ba47c7c52e4e2df5ecf484c1b0b0349805896dd350cbc416bdd91"},
-    {file = "Pillow-9.3.0-cp310-cp310-win_amd64.whl", hash = "sha256:9f47eabcd2ded7698106b05c2c338672d16a6f2a485e74481f524e2a23c2794b"},
-    {file = "Pillow-9.3.0-cp311-cp311-macosx_10_10_x86_64.whl", hash = "sha256:57751894f6618fd4308ed8e0c36c333e2f5469744c34729a27532b3db106ee20"},
-    {file = "Pillow-9.3.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:7db8b751ad307d7cf238f02101e8e36a128a6cb199326e867d1398067381bff4"},
-    {file = "Pillow-9.3.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3033fbe1feb1b59394615a1cafaee85e49d01b51d54de0cbf6aa8e64182518a1"},
-    {file = "Pillow-9.3.0-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:22b012ea2d065fd163ca096f4e37e47cd8b59cf4b0fd47bfca6abb93df70b34c"},
-    {file = "Pillow-9.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b9a65733d103311331875c1dca05cb4606997fd33d6acfed695b1232ba1df193"},
-    {file = "Pillow-9.3.0-cp311-cp311-manylinux_2_28_aarch64.whl", hash = "sha256:502526a2cbfa431d9fc2a079bdd9061a2397b842bb6bc4239bb176da00993812"},
-    {file = "Pillow-9.3.0-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:90fb88843d3902fe7c9586d439d1e8c05258f41da473952aa8b328d8b907498c"},
-    {file = "Pillow-9.3.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:89dca0ce00a2b49024df6325925555d406b14aa3efc2f752dbb5940c52c56b11"},
-    {file = "Pillow-9.3.0-cp311-cp311-win32.whl", hash = "sha256:3168434d303babf495d4ba58fc22d6604f6e2afb97adc6a423e917dab828939c"},
-    {file = "Pillow-9.3.0-cp311-cp311-win_amd64.whl", hash = "sha256:18498994b29e1cf86d505edcb7edbe814d133d2232d256db8c7a8ceb34d18cef"},
-    {file = "Pillow-9.3.0-cp37-cp37m-macosx_10_10_x86_64.whl", hash = "sha256:772a91fc0e03eaf922c63badeca75e91baa80fe2f5f87bdaed4280662aad25c9"},
-    {file = "Pillow-9.3.0-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:afa4107d1b306cdf8953edde0534562607fe8811b6c4d9a486298ad31de733b2"},
-    {file = "Pillow-9.3.0-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b4012d06c846dc2b80651b120e2cdd787b013deb39c09f407727ba90015c684f"},
-    {file = "Pillow-9.3.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:77ec3e7be99629898c9a6d24a09de089fa5356ee408cdffffe62d67bb75fdd72"},
-    {file = "Pillow-9.3.0-cp37-cp37m-manylinux_2_28_aarch64.whl", hash = "sha256:6c738585d7a9961d8c2821a1eb3dcb978d14e238be3d70f0a706f7fa9316946b"},
-    {file = "Pillow-9.3.0-cp37-cp37m-manylinux_2_28_x86_64.whl", hash = "sha256:828989c45c245518065a110434246c44a56a8b2b2f6347d1409c787e6e4651ee"},
-    {file = "Pillow-9.3.0-cp37-cp37m-win32.whl", hash = "sha256:82409ffe29d70fd733ff3c1025a602abb3e67405d41b9403b00b01debc4c9a29"},
-    {file = "Pillow-9.3.0-cp37-cp37m-win_amd64.whl", hash = "sha256:41e0051336807468be450d52b8edd12ac60bebaa97fe10c8b660f116e50b30e4"},
-    {file = "Pillow-9.3.0-cp38-cp38-macosx_10_10_x86_64.whl", hash = "sha256:b03ae6f1a1878233ac620c98f3459f79fd77c7e3c2b20d460284e1fb370557d4"},
-    {file = "Pillow-9.3.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:4390e9ce199fc1951fcfa65795f239a8a4944117b5935a9317fb320e7767b40f"},
-    {file = "Pillow-9.3.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:40e1ce476a7804b0fb74bcfa80b0a2206ea6a882938eaba917f7a0f004b42502"},
-    {file = "Pillow-9.3.0-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a0a06a052c5f37b4ed81c613a455a81f9a3a69429b4fd7bb913c3fa98abefc20"},
-    {file = "Pillow-9.3.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:03150abd92771742d4a8cd6f2fa6246d847dcd2e332a18d0c15cc75bf6703040"},
-    {file = "Pillow-9.3.0-cp38-cp38-manylinux_2_28_aarch64.whl", hash = "sha256:15c42fb9dea42465dfd902fb0ecf584b8848ceb28b41ee2b58f866411be33f07"},
-    {file = "Pillow-9.3.0-cp38-cp38-manylinux_2_28_x86_64.whl", hash = "sha256:51e0e543a33ed92db9f5ef69a0356e0b1a7a6b6a71b80df99f1d181ae5875636"},
-    {file = "Pillow-9.3.0-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:3dd6caf940756101205dffc5367babf288a30043d35f80936f9bfb37f8355b32"},
-    {file = "Pillow-9.3.0-cp38-cp38-win32.whl", hash = "sha256:f1ff2ee69f10f13a9596480335f406dd1f70c3650349e2be67ca3139280cade0"},
-    {file = "Pillow-9.3.0-cp38-cp38-win_amd64.whl", hash = "sha256:276a5ca930c913f714e372b2591a22c4bd3b81a418c0f6635ba832daec1cbcfc"},
-    {file = "Pillow-9.3.0-cp39-cp39-macosx_10_10_x86_64.whl", hash = "sha256:73bd195e43f3fadecfc50c682f5055ec32ee2c933243cafbfdec69ab1aa87cad"},
-    {file = "Pillow-9.3.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:1c7c8ae3864846fc95f4611c78129301e203aaa2af813b703c55d10cc1628535"},
-    {file = "Pillow-9.3.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2e0918e03aa0c72ea56edbb00d4d664294815aa11291a11504a377ea018330d3"},
-    {file = "Pillow-9.3.0-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b0915e734b33a474d76c28e07292f196cdf2a590a0d25bcc06e64e545f2d146c"},
-    {file = "Pillow-9.3.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:af0372acb5d3598f36ec0914deed2a63f6bcdb7b606da04dc19a88d31bf0c05b"},
-    {file = "Pillow-9.3.0-cp39-cp39-manylinux_2_28_aarch64.whl", hash = "sha256:ad58d27a5b0262c0c19b47d54c5802db9b34d38bbf886665b626aff83c74bacd"},
-    {file = "Pillow-9.3.0-cp39-cp39-manylinux_2_28_x86_64.whl", hash = "sha256:97aabc5c50312afa5e0a2b07c17d4ac5e865b250986f8afe2b02d772567a380c"},
-    {file = "Pillow-9.3.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:9aaa107275d8527e9d6e7670b64aabaaa36e5b6bd71a1015ddd21da0d4e06448"},
-    {file = "Pillow-9.3.0-cp39-cp39-win32.whl", hash = "sha256:bac18ab8d2d1e6b4ce25e3424f709aceef668347db8637c2296bcf41acb7cf48"},
-    {file = "Pillow-9.3.0-cp39-cp39-win_amd64.whl", hash = "sha256:b472b5ea442148d1c3e2209f20f1e0bb0eb556538690fa70b5e1f79fa0ba8dc2"},
-    {file = "Pillow-9.3.0-pp37-pypy37_pp73-macosx_10_10_x86_64.whl", hash = "sha256:ab388aaa3f6ce52ac1cb8e122c4bd46657c15905904b3120a6248b5b8b0bc228"},
-    {file = "Pillow-9.3.0-pp37-pypy37_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:dbb8e7f2abee51cef77673be97760abff1674ed32847ce04b4af90f610144c7b"},
-    {file = "Pillow-9.3.0-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bca31dd6014cb8b0b2db1e46081b0ca7d936f856da3b39744aef499db5d84d02"},
-    {file = "Pillow-9.3.0-pp37-pypy37_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:c7025dce65566eb6e89f56c9509d4f628fddcedb131d9465cacd3d8bac337e7e"},
-    {file = "Pillow-9.3.0-pp37-pypy37_pp73-win_amd64.whl", hash = "sha256:ebf2029c1f464c59b8bdbe5143c79fa2045a581ac53679733d3a91d400ff9efb"},
-    {file = "Pillow-9.3.0-pp38-pypy38_pp73-macosx_10_10_x86_64.whl", hash = "sha256:b59430236b8e58840a0dfb4099a0e8717ffb779c952426a69ae435ca1f57210c"},
-    {file = "Pillow-9.3.0-pp38-pypy38_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:12ce4932caf2ddf3e41d17fc9c02d67126935a44b86df6a206cf0d7161548627"},
-    {file = "Pillow-9.3.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ae5331c23ce118c53b172fa64a4c037eb83c9165aba3a7ba9ddd3ec9fa64a699"},
-    {file = "Pillow-9.3.0-pp38-pypy38_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:0b07fffc13f474264c336298d1b4ce01d9c5a011415b79d4ee5527bb69ae6f65"},
-    {file = "Pillow-9.3.0-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:073adb2ae23431d3b9bcbcff3fe698b62ed47211d0716b067385538a1b0f28b8"},
-    {file = "Pillow-9.3.0.tar.gz", hash = "sha256:c935a22a557a560108d780f9a0fc426dd7459940dc54faa49d83249c8d3e760f"},
 ]
 platformdirs = [
     {file = "platformdirs-2.5.4-py3-none-any.whl", hash = "sha256:af0276409f9a02373d540bf8480021a048711d572745aef4b7842dad245eba10"},
@@ -961,10 +766,6 @@ psutil = [
     {file = "psutil-5.9.4-cp36-abi3-win_amd64.whl", hash = "sha256:fd8522436a6ada7b4aad6638662966de0d61d241cb821239b2ae7013d41a43d4"},
     {file = "psutil-5.9.4-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:6001c809253a29599bc0dfd5179d9f8a5779f9dffea1da0f13c53ee568115e1e"},
     {file = "psutil-5.9.4.tar.gz", hash = "sha256:3d7f9739eb435d4b1338944abe23f49584bde5395f27487d2ee25ad9a8774a62"},
-]
-ptyprocess = [
-    {file = "ptyprocess-0.7.0-py2.py3-none-any.whl", hash = "sha256:4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35"},
-    {file = "ptyprocess-0.7.0.tar.gz", hash = "sha256:5c5d0a3b48ceee0b48485e0c26037c0acd7d29765ca3fbb5cb3831d347423220"},
 ]
 pycparser = [
     {file = "pycparser-2.21-py2.py3-none-any.whl", hash = "sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9"},
@@ -1002,7 +803,7 @@ pycryptodome = [
     {file = "pycryptodome-3.15.0-pp36-pypy36_pp73-win32.whl", hash = "sha256:9c772c485b27967514d0df1458b56875f4b6d025566bf27399d0c239ff1b369f"},
     {file = "pycryptodome-3.15.0.tar.gz", hash = "sha256:9135dddad504592bcc18b0d2d95ce86c3a5ea87ec6447ef25cfedea12d6018b8"},
 ]
-pygments = [
+Pygments = [
     {file = "Pygments-2.13.0-py3-none-any.whl", hash = "sha256:f643f331ab57ba3c9d89212ee4a2dabc6e94f117cf4eefde99a0574720d14c42"},
     {file = "Pygments-2.13.0.tar.gz", hash = "sha256:56a8508ae95f98e2b9bdf93a6be5ae3f7d8af858b43e02c5a2ff083726be40c1"},
 ]
@@ -1030,9 +831,6 @@ requests = [
     {file = "requests-2.28.1-py3-none-any.whl", hash = "sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349"},
     {file = "requests-2.28.1.tar.gz", hash = "sha256:7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983"},
 ]
-sh = [
-    {file = "sh-1.14.3.tar.gz", hash = "sha256:e4045b6c732d9ce75d571c79f5ac2234edd9ae4f5fa9d59b09705082bdca18c7"},
-]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
@@ -1056,10 +854,6 @@ trio = [
 urllib3 = [
     {file = "urllib3-1.26.12-py2.py3-none-any.whl", hash = "sha256:b930dd878d5a8afb066a637fbb35144fe7901e3b209d1cd4f524bd0e9deee997"},
     {file = "urllib3-1.26.12.tar.gz", hash = "sha256:3fa96cf423e6987997fc326ae8df396db2a8b7c667747d47ddd8ecba91f4a74e"},
-]
-virtualenv = [
-    {file = "virtualenv-20.16.7-py3-none-any.whl", hash = "sha256:efd66b00386fdb7dbe4822d172303f40cd05e50e01740b19ea42425cbe653e29"},
-    {file = "virtualenv-20.16.7.tar.gz", hash = "sha256:8691e3ff9387f743e00f6bb20f70121f5e4f596cae754531f2b3b3a1b1ac696e"},
 ]
 watchdog = [
     {file = "watchdog-2.1.9-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:a735a990a1095f75ca4f36ea2ef2752c99e6ee997c46b0de507ba40a09bf7330"},

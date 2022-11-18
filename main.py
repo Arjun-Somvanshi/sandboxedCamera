@@ -4,18 +4,21 @@ from kivy.factory import Factory as F
 import trio
 import os
 
-if platform != 'android':
+if platform != "android":
     from kivy.core.window import Window
+
     # Window.initial_size = (400, 800)
     Window.size = (1312 * 0.306777, 2460 * 0.306777)
     Window._set_window_pos(1040, 100)
     from icecream import ic
+
     # ic(Window.size)
 
 # print(os.listdir())
-# 
+#
 
-kv = Builder.load_string("""
+kv = Builder.load_string(
+    """
 <RootScreen>:
     screen_manager: screen_manager.__self__
     server_layout: server_layout.__self__
@@ -130,7 +133,7 @@ class RootScreen(F.Screen):
             shutil.unpack_archive("app_copy.zip")
             print("Updating last port used")
             self.update_last_port_used()
-            
+
             print("App updated, exiting app for refresh")
             self.app.restart()
         except Exception as e:
@@ -138,7 +141,7 @@ class RootScreen(F.Screen):
 
 
 class MainApp(BaseApp):
-    should_send_app_to_phone = True
+    should_send_app_to_phone = False
 
     def __init__(self, nursery):
         super().__init__()
@@ -149,6 +152,7 @@ class MainApp(BaseApp):
         self.screen_manager = self.root_screen.screen_manager
         self.change_screen("Main Screen")
         self.screen_manager.get_screen("Main Screen").set_entrypoint()
+        self.change_screen("Gallery Screen")
         return self.root_screen
 
     def change_screen(self, screen_name):
