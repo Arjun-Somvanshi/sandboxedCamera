@@ -11,10 +11,11 @@ from kivy.lang import Builder
 import os
 from .main_screen import readJsonFile
 
-print("CWD", os.getcwd())
-kv_path = os.getcwd() + "/screens/gallery_screen.kv"
-if kv_path not in Builder.files:
-    Builder.load_file("screens/gallery_screen.kv")
+# kivy is already loaded as per: https://stackoverflow.com/a/59011183/16355112
+# print("CWD", os.getcwd())
+# kv_path = os.getcwd() + "/screens/gallery_screen.kv"
+# if kv_path not in Builder.files:
+#     Builder.load_file("screens/gallery_screen.kv")
 
 
 class GalleryScreen(F.Screen):
@@ -22,8 +23,8 @@ class GalleryScreen(F.Screen):
 
 
 class SelectableRecycleBoxLayout(
-    LayoutSelectionBehavior
-):  # , FocusBehavior, RecycleBoxLayout
+    LayoutSelectionBehavior, FocusBehavior, RecycleBoxLayout
+):
     """Adds selection and focus behaviour to the view."""
 
     pass
@@ -64,12 +65,12 @@ class RV(RecycleView):
 
         # self.data = []
         if os.path.isfile("index.json"):
-            # read_data = readJsonFile(".", "index.json")
-            # print("wtf is read_data", read_data)
-            # self.data = [{"text": read_data[x]} for x in read_data.keys()]
-            # print("datata", self.data)
+            read_data = readJsonFile(".", "index.json")
+            print("wtf is read_data", read_data)
+            self.data = [{"text": read_data[x]} for x in read_data.keys()]
+            print("datata", self.data)
 
-            self.data = []  # WORKS
+            # self.data = []  # WORKS
             # self.data = [{"1"}]
             # print("self.data??", self.data)
             # print("what is self.data?", type(self.data), list(self.data))
