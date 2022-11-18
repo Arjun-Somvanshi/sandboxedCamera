@@ -13,37 +13,105 @@
 
 <Widget>:
     bgg_color: (1,1,1,0)
-    canvas.before:
-        Color:
-            rgba: root.bgg_color or (1,1,1,0)
-        Rectangle:
-            size: self.size
-            pos: self.pos
+    # canvas.before:
+    #     Color:
+    #         rgba: root.bgg_color or (1,1,1,0)
+    #     Rectangle:
+    #         size: self.size
+    #         pos: self.pos
 
 
 <MainScreen>:
     name: 'Main Screen'
-    BoxLayout:
-        padding: dp(10)
-        # Spacing:
-        Widget:
-        # RecycleView:
-        #     viewclass: "WorkerInfo"
-        #     data: root.data or [{}]*2
-        #     size_hint_x: None
-        #     width: dp(300)
-        #     RecycleBoxLayout:
-        #         default_size: dp(300), dp(260)
-        #         default_size_hint: None, None
-        #         size_hint_y: None
-        #         height: self.minimum_height
-        #         orientation: "vertical"        
-        #         spacing: dp(10)
-        #         # padding: dp(10)
-        Button:
-            text: "change screen"
-            on_release: app.change_screen("User Screen")
-        Widget:
+    ScreenManager:
+        id: sm
+        Screen:
+            name: "Login Screen"
+            canvas.before:
+                Color:
+                    rgba: dark_gray
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(10)
+                size_hint_x: 0.6
+                pos_hint: {"center_x": 0.5}
+                # Spacing:
+                spacing: dp(50)
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+                Label:
+                    text: "Sandboxed Gallery"
+                    font_size: self.parent.width/10
+                    size_hint_y: None
+                    height: dp(50)
+                Widget:
+                    size_hint_y: None
+                    height: dp(40)
+                TextInput:
+                    hint_text: "Enter Master Password"
+                    size_hint_y: None
+                    height: dp(50)
+                    halign: "center"
+                Button:
+                    text: "Signup"
+                    size_hint_y: None
+                    size_hint_x: 0.5
+                    pos_hint: {"center_x": 0.5}
+                    height: dp(50)
+                    on_release: 
+                        root.ids.sm.current = "Login Screen"
+                Widget:
+        Screen:
+            name: "Signup Screen"
+            canvas.before:
+                Color:
+                    rgba: dark_gray
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(10)
+                size_hint_x: 0.6
+                pos_hint: {"center_x": 0.5}
+                # Spacing:
+                spacing: dp(50)
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+                Label:
+                    text: "Sandboxed Gallery"
+                    font_size: self.parent.width/10
+                    size_hint_y: None
+                    height: dp(50)
+                Widget:
+                    size_hint_y: None
+                    height: dp(40)
+                TextInput:
+                    hint_text: "Enter Master Password"
+                    size_hint_y: None
+                    height: dp(50)
+                    halign: "center"
+                TextInput:
+                    hint_text: "Retype Master Password"
+                    halign: "center"
+                    size_hint_y: None
+                    height: dp(50)
+                Button:
+                    text: "Signup"
+                    size_hint_y: None
+                    size_hint_x: 0.5
+                    pos_hint: {"center_x": 0.5}
+                    height: dp(50)
+                    on_release: 
+                        root.ids.sm.current = "Login Screen"
+                Widget:
 
                  
 <WorkerInfo>:
