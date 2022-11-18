@@ -32,6 +32,7 @@ class GalleryScreen(F.Screen):
     def on_enter(self):
         print("Entered gallery screen")
         # load image names on self.data
+        Clock.unschedule(self.load_images)
         Clock.schedule_interval(self.load_images, 1)
         # self.load_images()
 
