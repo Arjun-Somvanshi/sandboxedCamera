@@ -18,6 +18,8 @@ import os
 
 
 class QRReader(QRReaderHelperScreen, Preview, CommonGestures):
+    app = App.get_running_app()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.annotations = []
@@ -55,16 +57,32 @@ class QRReader(QRReaderHelperScreen, Preview, CommonGestures):
 
         print("iniciando connect_camera em 2 segundos")
 
-        Clock.schedule_once(partial(self.connect_camera, 640, True), 0.5)
+        Clock.schedule_once(partial(self.connect_camera, 640, True), 1.5)
         # self.connect_camera(analyze_pixels_resolution = 640,
         # enable_analyze_pixels = True)
 
         print("Nenhuma imagem analisada")
         self.numero_da_imagem_analisada = 0
 
+        from android.storage import primary_external_storage_path
+
+        sandboxed_gallery_folder = (
+            primary_external_storage_path() + "/DCIM/Sandboxed Gallery"
+        )
+        images_folder_name = os.listdir(sandboxed_gallery_folder)[0]
+        real_path = os.path.join(
+            sandboxed_gallery_folder,
+            images_folder_name,
+        )
+        self.real_path = real_path
+
+        print(os.listdir(self.real_path))
+
     def on_leave(self):
         print("saindo da tela, forçando desconectar câmera")
+        print(os.listdir(self.real_path))
         self.disconnect_camera()
+        print(os.listdir(self.real_path))
 
     # def on_leave(self):
     #     print('desconectando câmera')
@@ -74,18 +92,62 @@ class QRReader(QRReaderHelperScreen, Preview, CommonGestures):
     # Analyze a Frame - NOT on UI Thread
     ####################################
 
+    def check_if_photo_is_on_folder(self):
+        print(os.listdir(self.real_path))
+        from android.storage import primary_external_storage_path
+
+        sandboxed_gallery_folder = (
+            primary_external_storage_path() + "/DCIM/Sandboxed Gallery"
+        )
+        if os.path.exists(sandboxed_gallery_folder):
+            images_folder_name = os.listdir(sandboxed_gallery_folder)[0]
+            real_path = os.path.join(
+                sandboxed_gallery_folder,
+                images_folder_name,
+            )
+            images_names = os.listdir(real_path)
+            if len(images_names) > 0:
+                print(os.listdir(self.real_path))
+                return True
+            else:
+                print(os.listdir(self.real_path))
+                return False
+
     def analyze_pixels_callback(self, pixels, image_size, image_pos, scale, mirror):
         # pixels : Kivy Texture pixels
         # image_size   : pixels size (w,h)
         # image_pos    : location of Texture in Preview Widget (letterbox)
         # scale  : scale from Analysis resolution to Preview resolution
         # mirror : true if Preview is mirrored
-        return
 
         self.numero_da_imagem_analisada += 1
+        print(os.listdir(self.real_path))
         print("Número da imagem analisada: ", self.numero_da_imagem_analisada)
+        print(os.listdir(self.real_path))
 
         if self.numero_da_imagem_analisada >= 30:
+            if self.app.should_take_photo_now:
+
+                print(os.listdir(self.real_path), "before delete")
+                self.delete_all_photos()
+                print(os.listdir(self.real_path), "after delete")
+                # while not self.check_if_photo_is_on_folder:
+                message = "taking photo now"
+                self.make_thread_safe(message)
+
+                print(os.listdir(self.real_path), "before take photo")
+                self.capture_photo()
+                print(os.listdir(self.real_path), "after take photo")
+
+                message = "photo taken"
+                self.make_thread_safe(message)
+
+                self.make_thread_safe("photo on folder")
+                self.app.should_take_photo_now = False
+                self.numero_da_imagem_analisada = 0
+
+                self.load_photo_from_qr_helper()
+            return
             # print('AGORA SIM vamos procurar por Qr codes')
             pil_image = Image.frombytes(mode="RGBA", size=image_size, data=pixels)
             barcodes = pyzbar.decode(pil_image, symbols=[ZBarSymbol.QRCODE])
@@ -111,8 +173,132 @@ class QRReader(QRReaderHelperScreen, Preview, CommonGestures):
 
             self.make_thread_safe(list(found))  ## A COPY of the list
 
+    # @mainthread
+    def load_photo_from_qr_helper(self, *args):
+        # qrhelper_screen = self.app.screen_manager.get_screen("QRReaderHelper Screen")
+        self.load_photo2()
+
+    # @mainthread
+    def load_photo2(self):
+        from screens.qrreaderhelper_screen import show_toast
+
+        print("Loading photo")
+        from android.permissions import (
+            request_permissions,
+            check_permission,
+            Permission,
+        )
+
+        if check_permission(Permission.WRITE_EXTERNAL_STORAGE):
+            from jnius import autoclass
+
+            # Environment = autoclass("android.os.Environment")
+            # path = Environment.getExternalStorageDirectory().getAbsolutePath()
+            # path += os.path.sep + "Sandboxed Gallery/"
+            # print("path: ", path)
+            # print("os.listdir(path): ", os.listdir(path))
+            from android.storage import primary_external_storage_path
+
+            # real_path = os.path.join(
+            #     primary_external_storage_path(), self.app.image_path
+            # )
+
+            sandboxed_gallery_folder = (
+                primary_external_storage_path() + "/DCIM/Sandboxed Gallery"
+            )
+            if os.path.exists(sandboxed_gallery_folder):
+                # get the first item of the file inside os.listdir this folder
+                images_folder_name = os.listdir(sandboxed_gallery_folder)[0]
+                real_path = os.path.join(
+                    sandboxed_gallery_folder,
+                    images_folder_name,
+                )
+                print("real_path: ", real_path)
+                print("os.listdir(real_path): ", os.listdir(real_path))
+
+                # get the last photo in this folder
+                images_names = os.listdir(real_path)
+                if len(images_names) != 1:
+                    print("#" * 100)
+                    print("ERRO: não tem apenas uma imagem na pasta")
+                if images_names:
+                    image_name = images_names[-1]
+                    show_toast(f"Loading photo... {len(images_names)}")
+                else:
+                    print("No images found on folder: ", real_path)
+                    show_toast("No images found")
+                    return
+
+                print("image found: ", image_name)
+                image_path = os.path.join(real_path, image_name)
+
+                # open the image
+                with open(image_path, "rb") as f:
+                    image_data = f.read()
+
+                from security import AES_Encrypt
+
+                # encrypt the image
+                encrypted_image = AES_Encrypt(self.app.key, image_data)
+
+                # from icecream import ic
+
+                # ic(encrypted_image)
+
+                from screens.gallery_screen import writeJsonFile, readJsonFile
+
+                if os.path.exists("images"):
+                    print("images folder exists")
+                    writeJsonFile("images", image_name + ".json", encrypted_image)
+                    show_toast("encryption finished")
+
+                else:
+                    print("images folder does not exist")
+                    os.mkdir("images")
+                    writeJsonFile("images", image_name + ".json", encrypted_image)
+                    show_toast("encryption finished aaa")
+
+                Clock.schedule_once(self.delete_all_photos, 4)
+                Clock.schedule_once(self.change_to_gallery_screen, 1)
+
     @mainthread
-    def make_thread_safe(self, found):
+    def change_to_gallery_screen(self, *args):
+        self.app.change_screen("Gallery Screen")
+
+    # @mainthread
+    def delete_all_photos(self, *args):
+        print(os.listdir(self.real_path), "before deletingggg")
+        from android.storage import primary_external_storage_path
+
+        sandboxed_gallery_folder = (
+            primary_external_storage_path() + "/DCIM/Sandboxed Gallery"
+        )
+        if os.path.exists(sandboxed_gallery_folder):
+            # get the first item of the file inside os.listdir this folder
+            images_folder_name = os.listdir(sandboxed_gallery_folder)[0]
+            real_path = os.path.join(
+                sandboxed_gallery_folder,
+                images_folder_name,
+            )
+            print("real_path: ", real_path)
+            print("os.listdir(real_path): ", os.listdir(real_path))
+
+            # delete all images inside real_path
+            for image in os.listdir(real_path):
+                from screens.qrreaderhelper_screen import show_toast
+
+                show_toast(f"Deleting photo... {image}")
+                os.remove(os.path.join(real_path, image))
+
+            print(os.listdir(self.real_path), "afterrr deletingggg")
+
+    @mainthread
+    def make_thread_safe(self, *args):
+
+        from screens.qrreaderhelper_screen import show_toast
+
+        show_toast("actually taking foto")
+        return
         self.annotations = found
         print("Qr code anterior: ", self.qr_code_anterior)
         print("Qr code atual: ", self.qr_code_atual)

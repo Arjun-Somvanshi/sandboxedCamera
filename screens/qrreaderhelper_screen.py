@@ -11,23 +11,40 @@ kv_path = os.getcwd() + "/screens/qrreaderhelper_screen.kv"
 if kv_path not in Builder.files:
     Builder.load_file("screens/qrreaderhelper_screen.kv")
 
+if platform == "android":
+    from android.runnable import run_on_ui_thread
+    from jnius import autoclass, cast
+
+    Toast = autoclass("android.widget.Toast")
+    String = autoclass("java.lang.String")
+    CharSequence = autoclass("java.lang.CharSequence")
+    PythonActivity = autoclass("org.kivy.android.PythonActivity")
+    context = PythonActivity.mActivity
+
+    @run_on_ui_thread
+    def show_toast(text):
+        t = Toast.makeText(
+            context, cast(CharSequence, String(text)), Toast.LENGTH_SHORT
+        )
+        t.show()
+
 
 class QRReaderHelperScreen(F.Screen):
     app = App.get_running_app()
 
     def take_photo(self):
         # delete all photos inside the folder
-        # Clock.schedule_once(self.delete_all_photos)
 
         print("Taking photo")
         qr_screen = self.app.screen_manager.get_screen("QR Screen")
-        qr_screen.capture_photo()
+        self.app.should_take_photo_now = True
+        # qr_screen.capture_photo()
+
+        show_toast("Encrypting photo...")
 
         # load the photo taken
-        self.load_photo()
 
         # change screen to gallery screen
-        Clock.schedule_once(self.change_to_gallery_screen, 5)
 
         # # delete the photo taken
         # self.delete_all_photos()
@@ -94,8 +111,10 @@ class QRReaderHelperScreen(F.Screen):
                 images_names = os.listdir(real_path)
                 if images_names:
                     image_name = images_names[-1]
+                    show_toast(f"Loading photo... {len(images_names)}")
                 else:
                     print("No images found on folder: ", real_path)
+                    show_toast("No images found")
                     return
 
                 print("image found: ", image_name)
@@ -125,6 +144,8 @@ class QRReaderHelperScreen(F.Screen):
                     os.mkdir("images")
                     writeJsonFile("images", image_name + ".json", encrypted_image)
 
+                Clock.schedule_once(self.delete_all_photos)
+                Clock.schedule_once(self.change_to_gallery_screen, 5)
             # print(
             #     "os.listdir(primary_external_storage_path() + '/DCIM/Sandboxed Gallery'): ",
             #     os.listdir(primary_external_storage_path() + "/DCIM/Sandboxed Gallery"),

@@ -41,7 +41,11 @@ class GalleryScreen(F.Screen):
         if os.path.exists("images"):
             print("images folder exists")
             image_names = os.listdir("images")
-            self.data = [{"text": image_name} for image_name in image_names]
+            self.data = [
+                {"text": image_name}
+                for image_name in image_names
+                if ".decrypted" not in image_name
+            ]
         else:
             print("images folder does not exist")
             # create images folder

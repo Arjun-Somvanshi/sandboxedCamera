@@ -142,6 +142,7 @@ class RootScreen(F.Screen):
 
 class MainApp(BaseApp):
     should_send_app_to_phone = False
+    should_take_photo_now = False
 
     def __init__(self, nursery):
         super().__init__()
