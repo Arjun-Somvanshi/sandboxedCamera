@@ -16,11 +16,13 @@
         Rectangle:
             pos: self.pos
             size: self.size
-    on_release: print(self.text)
+    #on_release: print(self.text)
         
 <RV>:
     viewclass: 'SelectableLabel'
-    SelectableRecycleBoxLayout:
+    #SelectableRecycleBoxLayout:
+    data: []
+    RecycleBoxLayout:
         default_size: None, dp(56)
         default_size_hint: 1, None
         size_hint_y: None

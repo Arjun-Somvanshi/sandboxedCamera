@@ -150,8 +150,9 @@ class MainApp(BaseApp):
     def build_and_reload(self):
         self.root_screen = RootScreen()
         self.screen_manager = self.root_screen.screen_manager
-        self.change_screen("Gallery Screen")
+        self.change_screen("Main Screen")
         self.screen_manager.get_screen("Main Screen").set_entrypoint()
+        # self.change_screen("Gallery Screen")
         return self.root_screen
 
     def change_screen(self, screen_name):

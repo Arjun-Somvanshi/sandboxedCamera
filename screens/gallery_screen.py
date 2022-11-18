@@ -7,9 +7,11 @@ from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.button import Button
 from kivy.factory import Factory as F
-import os
 from kivy.lang import Builder
+import os
+from .main_screen import readJsonFile
 
+print("CWD", os.getcwd())
 kv_path = os.getcwd() + "/screens/gallery_screen.kv"
 if kv_path not in Builder.files:
     Builder.load_file("screens/gallery_screen.kv")
@@ -20,13 +22,15 @@ class GalleryScreen(F.Screen):
 
 
 class SelectableRecycleBoxLayout(
-    FocusBehavior, LayoutSelectionBehavior, RecycleBoxLayout
-):
+    LayoutSelectionBehavior
+):  # , FocusBehavior, RecycleBoxLayout
     """Adds selection and focus behaviour to the view."""
+
+    pass
 
 
 class SelectableLabel(RecycleDataViewBehavior, Button):
-    """Add selection support to the Label"""
+    # """Add selection support to the Label"""
 
     index = None
     selected = BooleanProperty(False)
@@ -58,9 +62,18 @@ class RV(RecycleView):
     def __init__(self, **kwargs):
         super(RV, self).__init__(**kwargs)
 
+        # self.data = []
         if os.path.isfile("index.json"):
+            # read_data = readJsonFile(".", "index.json")
+            # print("wtf is read_data", read_data)
+            # self.data = [{"text": read_data[x]} for x in read_data.keys()]
+            # print("datata", self.data)
+
+            self.data = []  # WORKS
+            # self.data = [{"1"}]
+            # print("self.data??", self.data)
+            # print("what is self.data?", type(self.data), list(self.data))
             # self.data = F.ListProperty(readJsonFile(".", "index.json"))
-            self.data = [{"TEST DATA"}]
         else:
-            self.data = [{"TEST DATA"}]
-            # self.data = F.ListProperty([])
+            self.data = []
+        # self.data = F.ListProperty([])
