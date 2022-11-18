@@ -53,18 +53,18 @@
                     size_hint_y: None
                     height: dp(40)
                 TextInput:
+                    id: password
                     hint_text: "Enter Master Password"
                     size_hint_y: None
                     height: dp(50)
                     halign: "center"
                 Button:
-                    text: "Signup"
+                    text: "Login"
                     size_hint_y: None
                     size_hint_x: 0.5
                     pos_hint: {"center_x": 0.5}
                     height: dp(50)
-                    on_release: 
-                        root.ids.sm.current = "Login Screen"
+                    on_release: root.auth()
                 Widget:
         Screen:
             name: "Signup Screen"
@@ -111,8 +111,7 @@
                     size_hint_x: 0.5
                     pos_hint: {"center_x": 0.5}
                     height: dp(50)
-                    on_release: 
-                        root.ids.sm.current = "Login Screen"
+                    on_release: root.save_auth()
                 Widget:
 
                  

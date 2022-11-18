@@ -26,7 +26,20 @@ if kv_path not in Builder.files:
 ## File Handaling
 def writeJsonFile(dir, fn, data):
     with open(dir+os.sep+fn, "w") as f:
-        json.dump(fn, data, indent=2)
+        json.dump(data, f, indent=2)
+
+def readJsonFile(dir, fn):
+    with open(dir+os.sep+fn, "r") as f:
+        data = json.load(f)
+    return data
+
+
+## Hashing
+
+def hashit(passw):
+    hash_object = SHA256.new(data=passw.encode("utf-8"))
+    hex = hash_object.hexdigest()
+    return hex
 
 class MainScreen(F.Screen):
     def set_entrypoint(self):
@@ -36,15 +49,23 @@ class MainScreen(F.Screen):
             self.ids.sm.current = "Signup Screen"
 
     def save_auth(self):
-        if self.ids.passw.text = self.ids.repassw.text and self.ids.passw > 8:
+        if self.ids.passw.text == self.ids.repassw.text and len(self.ids.passw.text) > 8:
             # save credentials
             passw = self.ids.passw.text
-            hash_object = SHA256.new(data=passw.encode("utf-8"))
-            print(hash_object.digest())
+            hex = hashit(passw)
             # generate key
-
+            writeJsonFile(".", "creds", {"hash": hex})
             # change screen
             self.ids.sm.current = "Login Screen"
         else:
             print("You are not allowed")
+    def auth(self):
+        hex1 = hashit(self.ids.password.text)
+        hex2 = readJsonFile(".", "creds")["hash"]
+        if hex1 == hex2:
+            print("Gallery Opened")
+        else:
+            print("Wrong Password")
+
+
     
