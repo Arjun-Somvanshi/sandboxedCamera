@@ -58,6 +58,9 @@ class SelectableLabel(RecycleDataViewBehavior, Button):
         else:
             print("selection removed for {0}".format(rv.data[index]))
 
+    def on_release(self):
+        print("WHO WAS PRESSED", self.text)
+
 
 class RV(RecycleView):
     def __init__(self, **kwargs):
@@ -67,7 +70,8 @@ class RV(RecycleView):
         if os.path.isfile("index.json"):
             read_data = readJsonFile(".", "index.json")
             print("wtf is read_data", read_data)
-            self.data = [{"text": read_data[x]} for x in read_data.keys()]
+            # self.data = [{"text": read_data[x]} for x in read_data.keys()]
+            self.data = [read_data[x] for x in read_data.keys()]
             print("datata", self.data)
 
             # self.data = []  # WORKS
