@@ -10,12 +10,10 @@ from kivy.factory import Factory as F
 from kivy.lang import Builder
 import os
 from .main_screen import readJsonFile
+from kivy.app import App
 
 # kivy is already loaded as per: https://stackoverflow.com/a/59011183/16355112
-# print("CWD", os.getcwd())
-# kv_path = os.getcwd() + "/screens/gallery_screen.kv"
-# if kv_path not in Builder.files:
-#     Builder.load_file("screens/gallery_screen.kv")
+# print("Cgit
 
 
 class GalleryScreen(F.Screen):
@@ -60,6 +58,11 @@ class SelectableLabel(RecycleDataViewBehavior, Button):
 
     def on_release(self):
         print("WHO WAS PRESSED", self.text)
+        app = App.get_running_app()
+        sm = app.root_screen.screen_manager
+        app.change_screen("ImageViewer Screen")
+        image_screen = sm.get_screen("ImageViewer Screen")
+        image_screen.file_name = self.text
 
 
 class RV(RecycleView):
