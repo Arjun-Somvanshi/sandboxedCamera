@@ -73,6 +73,7 @@ if platform != "android":
                     "camera4kivy",
                     "camerax_provider",
                     ".DS_Store",
+                    "images",
                 ),
             )
 
