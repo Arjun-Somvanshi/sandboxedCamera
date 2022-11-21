@@ -17,7 +17,7 @@ async def connect_to_server():
     try:
         with trio.move_on_after(1):
             client_socket = await trio.open_tcp_stream(
-                "192.168.0.57", get_last_port_used()
+                "192.168.0.48", get_last_port_used()
             )
             return client_socket
     except Exception as e:

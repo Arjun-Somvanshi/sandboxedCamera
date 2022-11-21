@@ -40,6 +40,48 @@ class GalleryScreen(F.Screen):
         #         self.app.screen_manager.get_screen("QR Screen")
         #     )
 
+        if platform == "android":
+            from android.storage import primary_external_storage_path
+
+            sandboxed_gallery_folder = (
+                primary_external_storage_path() + "/DCIM/Sandboxed Gallery"
+            )
+
+            if os.path.exists(sandboxed_gallery_folder):
+                print("Sandboxed Gallery folder exists")
+            else:
+                print("Sandboxed Gallery folder does not exist yet")
+                os.mkdir(sandboxed_gallery_folder)
+                print("Sandboxed Gallery folder created")
+
+            # /
+            # print("/: ", os.listdir("/"))
+            # print("primary_external_storage_path", primary_external_storage_path())
+            # print("os.getcwd()", os.getcwd())
+            # print("os.listdir()", os.listdir())
+            # print(
+            #     "os.listdir(primary_external_storage_path)",
+            #     os.listdir(primary_external_storage_path()),
+            # )
+
+            # # dcim
+            # print(
+            #     "os.listdir(primary_external_storage_path + '/DCIM')",
+            #     os.listdir(primary_external_storage_path() + "/DCIM"),
+            # )
+
+            # # camera
+            # print(
+            #     "os.listdir(primary_external_storage_path + '/DCIM/Camera')",
+            #     os.listdir(primary_external_storage_path() + "/DCIM/Camera"),
+            # )
+
+            # # sandboxed gallery
+            # print(
+            #     "os.listdir(primary_external_storage_path + '/DCIM/Sandboxed Gallery')",
+            #     os.listdir(primary_external_storage_path() + "/DCIM/Sandboxed Gallery"),
+            # )
+
     def load_images(self, *args):
         # print("Loading images")
         if os.path.exists("images"):

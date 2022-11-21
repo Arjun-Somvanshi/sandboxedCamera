@@ -34,16 +34,32 @@ class QRReader(QRReaderHelperScreen, Preview, CommonGestures):
 
     def define_real_path(self):
         from android.storage import primary_external_storage_path
+        import datetime
+
+        current_date = datetime.datetime.now().strftime("%Y_%m_%d")
 
         sandboxed_gallery_folder = (
             primary_external_storage_path() + "/DCIM/Sandboxed Gallery"
         )
-        images_folder_name = os.listdir(sandboxed_gallery_folder)[-1]
+        images_folder_name = [
+            i
+            for i in os.listdir(sandboxed_gallery_folder)
+            if i.startswith(current_date)
+        ]
+        if not images_folder_name:
+            os.mkdir(os.path.join(sandboxed_gallery_folder, current_date))
+            images_folder_name = current_date
+        else:
+            images_folder_name = images_folder_name[0]
+
         real_path = os.path.join(
             sandboxed_gallery_folder,
             images_folder_name,
         )
         self.real_path = real_path
+
+        print("real_path: ", real_path)
+        print("os.listdir(real_path): ", os.listdir(real_path))
 
     def print_images(self, message=""):
         if self.number_of_image_analyzed % 5:
@@ -127,7 +143,7 @@ class QRReader(QRReaderHelperScreen, Preview, CommonGestures):
                 writeJsonFile("images", image_name + ".json", encrypted_image)
                 show_toast("Encryption finished")
 
-            # Clock.schedule_once(self.delete_all_photos, 4)
+            Clock.schedule_once(self.delete_all_photos, 4)
             Clock.schedule_once(self.change_to_gallery_screen, 1)
 
     @mainthread

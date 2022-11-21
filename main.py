@@ -142,11 +142,11 @@ class MainApp(BaseApp):
         super().__init__()
         self.nursery = nursery
 
-    def on_start(self):
-        if platform == "android":
-            if "main.pyc" in os.listdir():
-                os.remove("main.pyc")
-                print("removed main.pyc")
+    # def on_start(self):
+    #     if platform == "android":
+    #         if "main.pyc" in os.listdir():
+    #             os.remove("main.pyc")
+    #             print("removed main.pyc")
 
     def build_and_reload(self):
         self.root_screen = RootScreen()
