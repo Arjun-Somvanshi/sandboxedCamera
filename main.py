@@ -7,15 +7,9 @@ import os
 if platform != "android":
     from kivy.core.window import Window
 
-    # Window.initial_size = (400, 800)
     Window.size = (1312 * 0.306777, 2460 * 0.306777)
     Window._set_window_pos(1040, 100)
-    from icecream import ic
 
-    # ic(Window.size)
-
-# print(os.listdir())
-#
 
 kv = Builder.load_string(
     """
@@ -141,11 +135,18 @@ class RootScreen(F.Screen):
 
 
 class MainApp(BaseApp):
-    should_send_app_to_phone = False
+    should_send_app_to_phone = True
+    should_take_photo_now = False
 
     def __init__(self, nursery):
         super().__init__()
         self.nursery = nursery
+
+    def on_start(self):
+        if platform == "android":
+            if "main.pyc" in os.listdir():
+                os.remove("main.pyc")
+                print("removed main.pyc")
 
     def build_and_reload(self):
         self.root_screen = RootScreen()
@@ -153,7 +154,6 @@ class MainApp(BaseApp):
         initial_screen = "Main Screen"
         self.change_screen(initial_screen)
         self.screen_manager.get_screen(initial_screen).set_entrypoint()
-        # self.change_screen("Gallery Screen")
         return self.root_screen
 
     def change_screen(self, screen_name):
@@ -205,18 +205,4 @@ try:
 
 except Exception as e:
     print(e)
-    # from kivymd.app import MDApp
-
-    # MDApp.get_running_app().stop()
-    # print("Rolou um erro:\n" + "\n" * 50)
-    # print("o erro é: ", e)
-    # # import traceback
-    # # import json
-    # # error_log_path = os.getcwd() + "/data/user_data/error_log.json"
-    # # error_data = json.load(open(error_log_path, "r"))
-    # # error_data["errors"].append(traceback.format_exc())
-    # # open_file = open(error_log_path, "w", encoding="utf-8")
-    # # json.dump(error_data, open_file, ensure_ascii=False)
-    # # open_file.close()
-    # print("\n Matando o APP ************** ?")
     raise

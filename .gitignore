@@ -1,4 +1,3 @@
-bin
 buildozer.spec
 .buildozer
 app_copy.zip
@@ -9,3 +8,5 @@ temp
 configs
 salt
 creds
+app_copy
+bin

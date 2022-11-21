@@ -1,13 +1,17 @@
 <ImageViewerScreen>:
     name: "ImageViewer Screen"
+    image: image.__self__
     BoxLayout:
         orientation: 'vertical'
         Label: 
             text: root.file_name
+            size_hint_y: None
+            height: self.texture_size[1] + dp(20)
         AsyncImage:
-            id: async_image_id
+            id: image
             source: root.file_name
         Button:
             text: "Go Back"
             on_release: app.change_screen("Gallery Screen")
-
+            size_hint_y: None
+            height: dp(50)

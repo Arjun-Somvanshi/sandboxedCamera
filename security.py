@@ -5,6 +5,7 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Hash import SHA512
+from base64 import b64encode, b64decode
 
 
 def kdf(password, salt):
@@ -12,23 +13,40 @@ def kdf(password, salt):
     key = keys[:32]
     return key
 
+
 def make_salt():
     salt = get_random_bytes(16)
     return salt
 
-def AES_Encrypt(key, data): # The data should be in bytes here
+
+def ECB_encrypt(plaintext, key):
+    cipher = AES.new(key, AES.MODE_ECB)
+    ct = cipher.encrypt(plaintext)
+    return ct
+
+
+def ECB_decrypt(cipher_text, key):
+    cipher = AES.new(key, AES.MODE_ECB)
+    pt = cipher.decrypt(cipher_text)
+    return pt
+
+
+def AES_Encrypt(key, data):  # The data should be in bytes here
     cipher = AES.new(key, AES.MODE_CBC)
     ct_bytes = cipher.encrypt(pad(data, AES.block_size))
-    ct = b64encode(ct_bytes).decode('utf-8')
-    iv = b64encode(ECB_encrypt(cipher.iv, key)).decode('utf-8')
-    encrypted_data = {'iv': iv, 'ct': ct}
+    ct = b64encode(ct_bytes).decode("utf-8")
+    iv = b64encode(ECB_encrypt(cipher.iv, key)).decode("utf-8")
+    encrypted_data = {"iv": iv, "ct": ct}
     return encrypted_data
 
-    
-def AES_Decrypt(key, encrypted_data): # enrypted_data is a dictionary which contains the encrypted form of the iv and the encrypted data
-    iv = ECB_decrypt(b64decode(encrypted_data['iv']), key) # decoding from base64 and then getting the iv back by decrypting it
-    ct = b64decode(encrypted_data['ct'])
-    cipher = AES.new(key, AES.MODE_CBC, iv = iv )
+
+def AES_Decrypt(
+    key, encrypted_data
+):  # enrypted_data is a dictionary which contains the encrypted form of the iv and the encrypted data
+    iv = ECB_decrypt(
+        b64decode(encrypted_data["iv"]), key
+    )  # decoding from base64 and then getting the iv back by decrypting it
+    ct = b64decode(encrypted_data["ct"])
+    cipher = AES.new(key, AES.MODE_CBC, iv=iv)
     pt_bytes = unpad(cipher.decrypt(ct), AES.block_size)
     return pt_bytes
-
