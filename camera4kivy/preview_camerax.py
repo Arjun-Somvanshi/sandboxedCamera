@@ -194,10 +194,10 @@ class PreviewCameraX(PreviewCommon, CommonGestures):
             self._set_location(location)
             subdir = self._default_subdir_android(subdir)
             name = self._default_file_name(name, ".jpg")
-            print("subdir: ", subdir)
-            print("name: ", name)
-            print("location: ", location)
-            print("self.file_storage: ", self.file_storage)
+            # print("subdir: ", subdir)
+            # print("name: ", name)
+            # print("location: ", location)
+            # print("self.file_storage: ", self.file_storage)
             from kivy.app import App
             import os
 

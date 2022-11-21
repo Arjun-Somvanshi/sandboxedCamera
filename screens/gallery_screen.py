@@ -34,12 +34,16 @@ class GalleryScreen(F.Screen):
         # load image names on self.data
         Clock.unschedule(self.load_images)
         Clock.schedule_interval(self.load_images, 1)
-        # self.load_images()
+
+        # if "QR Screen" in self.app.screen_manager.screen_names:
+        #     self.app.screen_manager.remove_widget(
+        #         self.app.screen_manager.get_screen("QR Screen")
+        #     )
 
     def load_images(self, *args):
-        print("Loading images")
+        # print("Loading images")
         if os.path.exists("images"):
-            print("images folder exists")
+            # print("images folder exists")
             image_names = os.listdir("images")
             self.data = [
                 {"text": image_name}
@@ -82,14 +86,9 @@ class GalleryScreen(F.Screen):
                 print("permissão não concedida")
                 request_permissions([Permission.CAMERA], self.connect_camera)
         else:
-            print("Encrypting image")
             self.app.change_screen("QRReaderHelper Screen")
-            # image_name = "bleach villain introduction.png"
-            # self.encrypt_image(image_name)
 
     def encrypt_image(self, image_path):
-        # image_path = os.path.join(os.getcwd(), "images", image_name)
-        # encrypted_image_name = f'{image_name.split(".")[0]}.json'
         encrypted_image_name = f"{image_path.split('/')[-1].split('.')[0]}.json"
 
         # open the image
@@ -98,10 +97,6 @@ class GalleryScreen(F.Screen):
 
         # encrypt the image
         encrypted_image = AES_Encrypt(self.app.key, image_data)
-
-        from icecream import ic
-
-        ic(encrypted_image)
 
         if os.path.exists("images"):
             print("images folder exists")
@@ -157,11 +152,6 @@ class SelectableLabel(RecycleDataViewBehavior, Button):
     def apply_selection(self, rv, index, is_selected):
         """Respond to the selection of items in the view."""
         self.selected = is_selected
-        print("sel;f", self)
-        if is_selected:
-            print("selection changed to {0}".format(rv.data[index]))
-        else:
-            print("selection removed for {0}".format(rv.data[index]))
 
     def on_release(self):
         print("WHO WAS PRESSED", self.text)
@@ -170,25 +160,3 @@ class SelectableLabel(RecycleDataViewBehavior, Button):
         app.change_screen("ImageViewer Screen")
         image_screen = sm.get_screen("ImageViewer Screen")
         image_screen.file_name = self.text
-
-
-# class RV(RecycleView):
-#     def __init__(self, **kwargs):
-#         super(RV, self).__init__(**kwargs)
-
-#         # self.data = []
-#         if os.path.isfile("index.json"):
-#             read_data = readJsonFile(".", "index.json")
-#             print("wtf is read_data", read_data)
-#             # self.data = [{"text": read_data[x]} for x in read_data.keys()]
-#             self.data = [read_data[x] for x in read_data.keys()]
-#             print("datata", self.data)
-
-#             # self.data = []  # WORKS
-#             # self.data = [{"1"}]
-#             # print("self.data??", self.data)
-#             # print("what is self.data?", type(self.data), list(self.data))
-#             # self.data = F.ListProperty(readJsonFile(".", "index.json"))
-#         else:
-#             self.data = []
-#         # self.data = F.ListProperty([])

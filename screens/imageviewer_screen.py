@@ -34,18 +34,21 @@ class ImageViewerScreen(F.Screen):
     def decrypt_image(self, encrypted_image_name):
         encrypted_image_path = os.path.join(os.getcwd(), "images", encrypted_image_name)
 
-        image_data = readJsonFile("images", encrypted_image_name)
+        try:
+            image_data = readJsonFile("images", encrypted_image_name)
 
-        # decrypt the image
-        decrypted_image = AES_Decrypt(self.app.key, image_data)
+            # decrypt the image
+            decrypted_image = AES_Decrypt(self.app.key, image_data)
 
-        # save the decrypted image
-        decrypted_image_path = os.path.join(
-            os.getcwd(), "images", encrypted_image_name + ".decrypted"
-        )
+            # save the decrypted image
+            decrypted_image_path = os.path.join(
+                os.getcwd(), "images", encrypted_image_name + ".decrypted"
+            )
 
-        with open(decrypted_image_path, "wb") as f:
-            f.write(decrypted_image)
+            with open(decrypted_image_path, "wb") as f:
+                f.write(decrypted_image)
 
-        # load the decrypted image
-        self.image.source = decrypted_image_path
+            # load the decrypted image
+            self.image.source = decrypted_image_path
+        except Exception as e:
+            print("Error decrypting image: " + str(e))

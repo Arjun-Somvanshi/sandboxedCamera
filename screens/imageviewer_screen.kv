@@ -5,6 +5,8 @@
         orientation: 'vertical'
         Label: 
             text: root.file_name
+            size_hint_y: None
+            height: self.texture_size[1] + dp(20)
         AsyncImage:
             id: image
             source: root.file_name
